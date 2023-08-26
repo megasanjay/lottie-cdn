@@ -18,7 +18,11 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    shim: false,
+    tsConfig: {
+      compilerOptions: {
+        types: [],
+      },
+    },
   },
 
   css: ["@/assets/css/tailwind.css"],
