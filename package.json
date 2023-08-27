@@ -2,10 +2,23 @@
   "name": "lottie-cdn",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "yarn prisma:generate && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "yarn lint:js && yarn lint:prettier",
+    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:dev": "prisma migrate dev --preview-feature",
+    "prisma:studio": "prisma studio",
+    "prisma:db:push": "prisma db push",
+    "prisma:db:pull": "prisma db pull --preview-feature",
+    "scripts:truncate:tables": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/truncate-tables.mts",
+    "scripts:fetch:save:identifiers": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/fetch-save-identifiers.mts",
+    "scripts:compare:identifiers": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/compare-identifiers.mts",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
@@ -34,11 +47,13 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@lucia-auth/adapter-prisma": "^3.0.1",
     "@pinia/nuxt": "^0.4.11",
     "@prisma/client": "^5.2.0",
     "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
+    "lucia": "^2.4.0",
     "nanoid": "^4.0.2",
     "pinia": "^2.1.6",
     "uuid": "^9.0.0",

@@ -873,6 +873,11 @@
     methods "^1.1.2"
     path-to-regexp "^6.1.0"
 
+"@lucia-auth/adapter-prisma@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@lucia-auth/adapter-prisma/-/adapter-prisma-3.0.1.tgz#715c113c61fc994ac2558fa650fe70c4726fe7d9"
+  integrity sha512-JZNl+721M5ApjtNiH+WUYstiC8cffcI/Y9IzKsa0uUhQMIHl2ObCrgO0R3fgHnjWHBjhQoK36g/r/iSJIDppBA==
+
 "@mapbox/node-pre-gyp@^1.0.5":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.11.tgz#417db42b7f5323d79e93b34a6d7a2a12c0df43fa"
@@ -5525,6 +5530,11 @@ lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
 
+lucia@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/lucia/-/lucia-2.4.0.tgz#892b7baad9dbd8004a974f219b0bba6d3948336c"
+  integrity sha512-v2pyFQVF734+EU3m9GeeJQorFR7zLt7JoOJ1UD5ttR5Z+w4IkOyExiXyFe+zssKpony66u94wcxyws3lZSpzzg==
+
 magic-string-ast@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/magic-string-ast/-/magic-string-ast-0.3.0.tgz#8fc83ac6d084c5a342645a30354184a6e0ab4382"
@@ -6189,7 +6199,7 @@ nuxt-icon@^0.5.0:
     "@iconify/vue" "^4.1.1"
     "@nuxt/kit" "^3.6.5"
 
-nuxt@^3.6.5:
+nuxt@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.7.0.tgz#bc54cdacee28c62e3243a0b4b65dbed66ff1e613"
   integrity sha512-y0/xHYqwuJt20r26xezjpr74FLWR144dMpwSxZ/O2XXUrQUnyO7vHm3fEY4vi+miKbf343YMH5B78GXAELO/Vw==
