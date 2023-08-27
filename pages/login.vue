@@ -9,16 +9,48 @@ if (user.value) {
 
 const errorMessage = ref<string | null>(null);
 
+const username = ref("");
+const password = ref("");
+
+const loading = ref(false);
+
+const signIn = async () => {
+  loading.value = true;
+
+  try {
+    await $fetch("/api/login", {
+      method: "POST",
+      body: {
+        username: username.value,
+        password: password.value,
+      },
+      redirect: "manual",
+    });
+    await navigateTo("/"); // profile page
+  } catch (e) {
+    const { data: error } = e as {
+      data: {
+        message: string;
+      };
+    };
+    errorMessage.value = error.message;
+  }
+
+  loading.value = false;
+};
+
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   try {
     await $fetch("/api/login", {
       method: "POST",
+
       body: {
         username: formData.get("username"),
         password: formData.get("password"),
       },
+
       redirect: "manual",
     });
     await navigateTo("/"); // profile page
@@ -34,27 +66,96 @@ const handleSubmit = async (e: Event) => {
 </script>
 
 <template>
-  <main>
-    <h1>Sign in</h1>
+  <main class="flex h-full flex-row flex-wrap items-center justify-center">
+    <div class="h-full w-1/2 bg-slate-900">
+      <ClientOnly>
+        <Vue3Lottie
+          animation-link="https://lottie.host/75efd83c-9b76-4e72-9fac-15c7846efd43/3UEBNggUWU.json"
+          width="50%"
+        />
+      </ClientOnly>
+    </div>
 
-    <form method="post" action="/api/login" @submit.prevent="handleSubmit">
-      <label for="username">Username</label>
+    <div class="flex w-1/2 flex-col items-center">
+      <div
+        class="mt-4 w-full max-w-lg space-y-6 rounded-lg bg-white px-4 py-6 sm:px-8 sm:py-8"
+      >
+        <div class="pb-4">
+          <h1 class="mb-3 text-left text-2xl font-bold sm:text-4xl">
+            Welcome back!
+          </h1>
 
-      <input name="username" id="username" />
+          <p>Sign in to your account to continue using our services.</p>
+        </div>
 
-      <br />
+        <div class="flex w-full flex-col">
+          <span class="mb-1 text-left text-sm text-slate-600"> Username </span>
 
-      <label for="password">Password</label>
+          <n-input
+            v-model:value="username"
+            type="text"
+            size="large"
+            placeholder="lucia"
+          />
+        </div>
 
-      <input type="password" name="password" id="password" />
+        <div class="flex flex-col">
+          <span class="mb-1 text-left text-sm text-slate-600"> Password </span>
 
-      <br />
+          <n-input
+            v-model:value="password"
+            type="password"
+            show-password-on="mousedown"
+            size="large"
+            placeholder=""
+          />
+        </div>
 
-      <input type="submit" />
-    </form>
+        <n-button
+          strong
+          secondary
+          type="primary"
+          size="large"
+          :loading="loading"
+          :disabled="!username || !password"
+          @click="signIn"
+          class="w-full"
+        >
+          <template #icon>
+            <Icon name="ph:sign-in-bold" />
+          </template>
+          Sign In
+        </n-button>
 
-    <p class="error">{{ errorMessage }}</p>
+        <div class="flex justify-center text-sm">
+          Don't have an account?
+          <nuxt-link
+            class="ml-1 w-fit text-blue-600 transition-all hover:text-blue-400"
+            to="/auth/register"
+          >
+            Sign Up
+          </nuxt-link>
+        </div>
 
-    <NuxtLink to="/signup">Create an account</NuxtLink>
+        <n-divider class="text-slate-400"> </n-divider>
+
+        <p class="mx-auto w-9/12 text-center text-sm">
+          By signing in, you agree to our
+          <nuxt-link
+            class="text-blue-600 transition-all hover:text-blue-400"
+            to="/terms"
+          >
+            Terms of Service
+          </nuxt-link>
+          and
+          <nuxt-link
+            class="text-blue-600 transition-all hover:text-blue-400"
+            to="/privacy"
+          >
+            Privacy Policy</nuxt-link
+          >.
+        </p>
+      </div>
+    </div>
   </main>
 </template>
