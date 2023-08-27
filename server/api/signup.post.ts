@@ -26,6 +26,10 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
+
+  console.log("username", username);
+  console.log("password", password);
+
   try {
     const user = await auth.createUser({
       key: {
@@ -37,14 +41,20 @@ export default defineEventHandler(async (event) => {
         username,
       },
     });
+
     const session = await auth.createSession({
       userId: user.userId,
       attributes: {},
     });
+
     const authRequest = auth.handleRequest(event);
+
     authRequest.setSession(session);
+
     return sendRedirect(event, "/"); // redirect to profile page
   } catch (e) {
+    console.log("e", e);
+
     // check for unique constraint error in user table
 
     // if (e instanceof SqliteError && e.code === "SQLITE_CONSTRAINT_UNIQUE") {

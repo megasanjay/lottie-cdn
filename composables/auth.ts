@@ -7,13 +7,17 @@ export const useUser = () => {
 
 export const useAuthenticatedUser = () => {
   const user = useUser();
+
   return computed(() => {
+    console.log("user", user);
     const userValue = unref(user);
+
     if (!userValue) {
       throw createError(
         "useAuthenticatedUser() can only be used in protected pages"
       );
     }
+
     return userValue;
   });
 };

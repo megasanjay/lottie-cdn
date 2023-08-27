@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 const user = useUser();
+
+console.log(user.value); // null
+
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
 }
@@ -31,14 +34,27 @@ const handleSubmit = async (e: Event) => {
 </script>
 
 <template>
-  <h1>Sign in</h1>
-  <form method="post" action="/api/login" @submit.prevent="handleSubmit">
-    <label for="username">Username</label>
-    <input name="username" id="username" /><br />
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" /><br />
-    <input type="submit" />
-  </form>
-  <p class="error">{{ errorMessage }}</p>
-  <NuxtLink to="/signup">Create an account</NuxtLink>
+  <main>
+    <h1>Sign in</h1>
+
+    <form method="post" action="/api/login" @submit.prevent="handleSubmit">
+      <label for="username">Username</label>
+
+      <input name="username" id="username" />
+
+      <br />
+
+      <label for="password">Password</label>
+
+      <input type="password" name="password" id="password" />
+
+      <br />
+
+      <input type="submit" />
+    </form>
+
+    <p class="error">{{ errorMessage }}</p>
+
+    <NuxtLink to="/signup">Create an account</NuxtLink>
+  </main>
 </template>

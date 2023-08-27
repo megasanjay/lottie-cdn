@@ -1,8 +1,11 @@
+import protectRoute from "../utils/protectRoute";
+
 export default defineEventHandler(async (event) => {
-  const authRequest = auth.handleRequest(event);
-  const session = await authRequest.validate();
+  const user = await protectRoute(event);
+
+  console.log("user", user);
 
   return {
-    user: session?.user ?? null,
+    user,
   };
 });

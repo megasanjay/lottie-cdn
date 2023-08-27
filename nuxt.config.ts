@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  alias: {},
+  alias: {
+    "@server": "./server",
+  },
 
   app: {
     head: {
-      title: "Scholar Stack",
+      title: "LottieLinker",
       meta: [
         {
           name: "viewport",
