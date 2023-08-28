@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const user = useUser();
 
-console.log(user.value); // null
+const message = useMessage();
 
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
@@ -14,11 +14,11 @@ const password = ref("");
 
 const loading = ref(false);
 
-const signIn = async () => {
+const signUp = async () => {
   loading.value = true;
 
   try {
-    await $fetch("/api/login", {
+    await $fetch("/api/signup", {
       method: "POST",
       body: {
         username: username.value,
@@ -26,42 +26,19 @@ const signIn = async () => {
       },
       redirect: "manual",
     });
-    await navigateTo("/"); // profile page
+
+    await navigateTo("/auth/login"); // profile page
   } catch (e) {
     const { data: error } = e as {
       data: {
         message: string;
       };
     };
-    errorMessage.value = error.message;
+
+    message.error(error.message);
   }
 
   loading.value = false;
-};
-
-const handleSubmit = async (e: Event) => {
-  if (!(e.target instanceof HTMLFormElement)) return;
-  const formData = new FormData(e.target);
-  try {
-    await $fetch("/api/login", {
-      method: "POST",
-
-      body: {
-        username: formData.get("username"),
-        password: formData.get("password"),
-      },
-
-      redirect: "manual",
-    });
-    await navigateTo("/"); // profile page
-  } catch (e) {
-    const { data: error } = e as {
-      data: {
-        message: string;
-      };
-    };
-    errorMessage.value = error.message;
-  }
 };
 </script>
 
@@ -82,10 +59,10 @@ const handleSubmit = async (e: Event) => {
       >
         <div class="pb-4">
           <h1 class="mb-3 text-left text-2xl font-bold sm:text-4xl">
-            Welcome back!
+            Hello, Friend!
           </h1>
 
-          <p>Sign in to your account to continue using our services.</p>
+          <p>Sign up for an account</p>
         </div>
 
         <div class="flex w-full flex-col">
@@ -118,43 +95,26 @@ const handleSubmit = async (e: Event) => {
           size="large"
           :loading="loading"
           :disabled="!username || !password"
-          @click="signIn"
+          @click="signUp"
           class="w-full"
         >
           <template #icon>
-            <Icon name="ph:sign-in-bold" />
+            <Icon name="" />
           </template>
-          Sign In
+          Sign Up
         </n-button>
 
+        <n-divider />
+
         <div class="flex justify-center text-sm">
-          Don't have an account?
+          Already have an account?
           <nuxt-link
             class="ml-1 w-fit text-blue-600 transition-all hover:text-blue-400"
-            to="/auth/register"
+            to="/auth/login"
           >
-            Sign Up
+            Sign In
           </nuxt-link>
         </div>
-
-        <n-divider class="text-slate-400"> </n-divider>
-
-        <p class="mx-auto w-9/12 text-center text-sm">
-          By signing in, you agree to our
-          <nuxt-link
-            class="text-blue-600 transition-all hover:text-blue-400"
-            to="/terms"
-          >
-            Terms of Service
-          </nuxt-link>
-          and
-          <nuxt-link
-            class="text-blue-600 transition-all hover:text-blue-400"
-            to="/privacy"
-          >
-            Privacy Policy</nuxt-link
-          >.
-        </p>
       </div>
     </div>
   </main>

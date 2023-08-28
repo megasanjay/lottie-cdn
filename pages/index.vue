@@ -5,15 +5,15 @@ definePageMeta({
 
 const user = useAuthenticatedUser();
 
-const handleLogout = async (e: Event) => {
-  if (!(e.target instanceof HTMLFormElement)) return;
+const handleLogout = async () => {
+  // if (!(e.target instanceof HTMLFormElement)) return;
 
   await $fetch("/api/logout", {
     method: "POST",
     redirect: "manual",
   });
 
-  await navigateTo("/login");
+  await navigateTo("/auth/login");
 };
 </script>
 
@@ -22,8 +22,12 @@ const handleLogout = async (e: Event) => {
     <h1>Profile</h1>
     <p>User id: {{ user.userId }}</p>
     <p>Username: {{ user.username }}</p>
-    <form method="post" action="/api/logout" @submit.prevent="handleLogout">
+    <!-- <form method="post" action="/api/logout" @submit.prevent="handleLogout">
       <input type="submit" value="Sign out" />
-    </form>
+    </form> -->
+
+    <n-button @click="handleLogout"> Sign out </n-button>
+
+    <NuxtLink to="/lotties/new"> Create new</NuxtLink>
   </main>
 </template>

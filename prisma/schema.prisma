@@ -17,6 +17,9 @@ model User {
 
   auth_session Session[]
   key          Key[]
+  Lottie       Lottie[]
+  Like         Like[]
+  Comment      Comment[]
 }
 
 model Session {
@@ -36,4 +39,50 @@ model Key {
   user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
   @@index([user_id])
+}
+
+model Lottie {
+  id String @id @unique
+
+  name                   String @default("Untitled")
+  description            String @default("")
+  original_animation_url String @default("") // lottiefiles url
+
+  created_at DateTime @default(now())
+
+  created_by String
+  user       User   @relation(references: [id], fields: [created_by], onDelete: Cascade)
+
+  Like    Like[]
+  Comment Comment[]
+
+  @@index([created_by])
+}
+
+model Like {
+  id String @id @default(cuid())
+
+  user_id String
+  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  lottie_id String
+  lottie    Lottie @relation(references: [id], fields: [lottie_id], onDelete: Cascade)
+
+  @@index([lottie_id])
+}
+
+model Comment {
+  id String @id @default(cuid())
+
+  user_id String
+  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  lottie_id String
+  lottie    Lottie @relation(references: [id], fields: [lottie_id], onDelete: Cascade)
+
+  content String @default("")
+
+  created_at DateTime @default(now())
+
+  @@index([lottie_id])
 }

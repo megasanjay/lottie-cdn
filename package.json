@@ -51,6 +51,8 @@
     "@pinia/nuxt": "^0.4.11",
     "@prisma/client": "^5.2.0",
     "dayjs": "^1.11.9",
+    "formidable": "^3.5.1",
+    "h3-formidable": "^0.3.8",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "lucia": "^2.4.0",
