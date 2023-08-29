@@ -16,6 +16,7 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "error",
 
     endOfLine: "off",
 

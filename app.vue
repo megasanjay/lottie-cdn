@@ -21,7 +21,7 @@ const themeConfig: ThemeConfig = {
 };
 
 useHead({
-  title: "LottieLinker",
+  title: "Lottiel.ink",
   bodyAttrs: {
     class: "test",
   },
@@ -57,8 +57,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content:
-        "LottieLinker is a tool to help you manage Lottie animations for your website.",
+      content: "LottieLink is a storage platform for commonly used lotties.",
     },
     {
       name: "msapplication-TileColor",

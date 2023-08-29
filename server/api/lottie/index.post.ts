@@ -51,8 +51,8 @@ export default defineEventHandler(async (event) => {
     {
       body: jsonFile,
       headers: {
-        AccessKey: process.env.BUNNY_STORAGE_ACCESS_KEY,
-        ContentType: "application/json",
+        AccessKey: process.env.BUNNY_STORAGE_ACCESS_KEY ?? "",
+        "Content-Type": "application/json",
       },
       method: "PUT",
     },
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Save the lottie animation to the database
-  const lottieAnimation = await prisma.Lottie.create({
+  const lottieAnimation = await prisma.lottie.create({
     data: {
       id: assetId,
       name,
