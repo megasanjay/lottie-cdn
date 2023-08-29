@@ -31,6 +31,10 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
   },
 
   imports: {
@@ -38,9 +42,9 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    "@bg-dev/nuxt-naiveui",
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
-    "@pinia-plugin-persistedstate/nuxt",
     [
       "@nuxtjs/google-fonts",
       {
@@ -49,8 +53,8 @@ export default defineNuxtConfig({
         },
       },
     ],
+    "@pinia-plugin-persistedstate/nuxt",
     "@nuxt/devtools",
-    "@bg-dev/nuxt-naiveui",
     "nuxt-icon", // icons are found here: https://icones.js.org/
   ],
 
