@@ -8354,6 +8354,11 @@ unique-slug@^4.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
+unique-username-generator@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/unique-username-generator/-/unique-username-generator-1.2.0.tgz#fc080da4863dcbec7bdf9f09ce3ed62605892487"
+  integrity sha512-aQB5mNOZGeZqQWku15xZeTaD0spV48GmlSmNrabYrx/5DcNDNYgSiwY2cQ0TglkO7Raz+VCUTCERe+CRZf7OLg==
+
 universalify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
@@ -8672,6 +8677,11 @@ vue-router@^4.2.4:
   integrity sha512-9PISkmaCO02OzPVOMq2w82ilty6+xJmQrarYZDkjZBfl4RvYAlt4PKnEX21oW4KTtWfa9OuO/b3qk1Od3AEdCQ==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
+
+vue-search-input@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/vue-search-input/-/vue-search-input-1.1.12.tgz#6b21ebdca867587b1d20bc7dd7f6e5f702ae5c81"
+  integrity sha512-c99EocQHrWbebZDNBP95IxzC9ilBrHmILhpKr1G55mONAm4oYwHC6CJKsNYGIkuvP1L8Sf0/ZrHhkzN/SFW+Vw==
 
 vue3-lottie@^3.1.0:
   version "3.1.0"

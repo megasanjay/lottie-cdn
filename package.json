@@ -18,8 +18,7 @@
     "prisma:db:push": "prisma db push",
     "prisma:db:pull": "prisma db pull --preview-feature",
     "scripts:truncate:tables": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/truncate-tables.mts",
-    "scripts:fetch:save:identifiers": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/fetch-save-identifiers.mts",
-    "scripts:compare:identifiers": "ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/compare-identifiers.mts",
+    "scripts:build:search:index": "npx ts-node --project tsconfig.tsnode.json --esm --swc ./scripts/build-search-index.mts",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
@@ -33,6 +32,7 @@
     "@types/node": "^20.5.6",
     "@typescript-eslint/parser": "^6.4.1",
     "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -60,7 +60,9 @@
     "lucia": "^2.4.0",
     "nanoid": "^4.0.2",
     "pinia": "^2.1.6",
+    "unique-username-generator": "^1.2.0",
     "uuid": "^9.0.0",
+    "vue-search-input": "^1.1.12",
     "vue3-lottie": "^3.1.0",
     "vue3-marquee": "^4.0.0",
     "zod": "^3.22.2"

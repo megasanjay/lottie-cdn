@@ -43,7 +43,7 @@ const signIn = async () => {
 
 <template>
   <main class="flex h-full flex-row flex-wrap items-center justify-center">
-    <div class="h-full w-1/2 bg-slate-900">
+    <div class="h-[calc(100vh-50px)] w-1/2 bg-slate-900">
       <ClientOnly>
         <Vue3Lottie
           animation-link="https://lottie.host/75efd83c-9b76-4e72-9fac-15c7846efd43/3UEBNggUWU.json"

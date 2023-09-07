@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { ThemeConfig } from "@bg-dev/nuxt-naiveui";
+import "vue-search-input/dist/styles.css";
 
 const themeConfig: ThemeConfig = {
   dark: {}, // Theme options applied on dark mode

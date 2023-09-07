@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
+
   if (
     typeof password !== "string" ||
     password.length < 1 ||
@@ -26,17 +27,22 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
+
   try {
     // find user by key
     // and validate password
     const key = await auth.useKey("username", username.toLowerCase(), password);
+
     const session = await auth.createSession({
       userId: key.userId,
       attributes: {},
     });
+
     const authRequest = auth.handleRequest(event);
+
     authRequest.setSession(session);
-    return sendRedirect(event, "/"); // redirect to profile page
+
+    return sendRedirect(event, "/animations"); // redirect to animations page
   } catch (e) {
     if (
       e instanceof LuciaError &&
@@ -50,6 +56,9 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
       });
     }
+
+    console.error(e);
+
     throw createError({
       message: "An unknown error occurred",
       statusCode: 500,

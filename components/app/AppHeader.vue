@@ -1,8 +1,12 @@
 <script setup lang="ts">
+// import SearchInput from "vue-search-input";
+
 const user = useUser();
 const message = useMessage();
+const queryParams = useRoute().query;
 
-const searchTerm = ref("");
+const searchInput = ref<HTMLInputElement | null>(null);
+const searchTerm = ref(queryParams.q?.toString() || "");
 
 const options = [
   {
@@ -26,6 +30,23 @@ const options = [
 
 const handleSelect = (key: string | number) => {
   message.info(String(key));
+};
+
+const highlightText = () => {
+  searchInput.value?.select();
+};
+
+const searchForLotties = async () => {
+  const query = searchTerm.value.trim();
+
+  if (!query) return;
+
+  await navigateTo({
+    path: "/search",
+    query: {
+      q: encodeURIComponent(query),
+    },
+  });
 };
 </script>
 
@@ -74,9 +95,16 @@ const handleSelect = (key: string | number) => {
             type="text"
             clearable
             placeholder="Loaders"
+            @keyup.enter="searchForLotties"
+            ref="searchInput"
+            @focus="highlightText"
           />
-          <n-button type="info" secondary> Search </n-button>
+          <n-button type="info" secondary @click="searchForLotties">
+            Search
+          </n-button>
         </n-input-group>
+
+        <!-- <SearchInput v-model="searchTerm" /> -->
 
         <n-divider vertical />
 

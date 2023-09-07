@@ -44,9 +44,10 @@ model Key {
 model Lottie {
   id String @id @unique
 
-  name                   String @default("Untitled")
-  description            String @default("")
-  original_animation_url String @default("") // lottiefiles url
+  name                   String   @default("Untitled")
+  description            String   @default("")
+  tags                   String[] @default([])
+  original_animation_url String   @default("") // lottiefiles url
 
   created_at DateTime @default(now())
 

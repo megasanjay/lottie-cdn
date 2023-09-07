@@ -9,9 +9,6 @@ dayjs.extend(utc);
 const message = useMessage();
 const route = useRoute();
 
-const bunnyCDNLottieUrl = ref(
-  `https://cdn-lottie.b-cdn.net/assets/${route.params.id}.json`,
-);
 const cdnLottieUrl = ref(
   `https://cdn.lottiel.ink/assets/${route.params.id}.json`,
 );
@@ -68,25 +65,63 @@ const createdDate = computed(() => {
 
     <div class="w-full h-full max-h-[500px]">
       <ClientOnly>
-        <Vue3Lottie :animation-link="bunnyCDNLottieUrl" />
+        <template #fallback>
+          <div class="flex justify-center items-center">
+            <n-skeleton height="200px" circle />
+          </div>
+        </template>
+
+        <Vue3Lottie :animation-link="cdnLottieUrl" />
       </ClientOnly>
     </div>
 
     <n-tabs type="line" animated>
       <n-tab-pane name="Details" tab="Details">
-        <n-space vertical class="px-2">
+        <n-space vertical class="px-2 space-y-1">
           <p class="text-lg py-4">
             {{ data?.description }}
           </p>
 
           <n-space>
-            <Icon name="bi:calendar-date-fill" />
-            <span class="text-sm">{{ createdDate }}</span>
+            <Icon name="ph:calendar-fill" size="25" />
+
+            <p>{{ createdDate }}</p>
+          </n-space>
+
+          <n-space v-if="data?.original_animation_url">
+            <Icon name="mingcute:external-link-fill" size="25" />
+
+            <n-popover trigger="hover" placement="bottom-end">
+              <template #trigger>
+                <NuxtLink
+                  :to="data?.original_animation_url"
+                  target="_blank"
+                  rel="noopener"
+                  class="hover:underline hover:text-cyan-600 transition-all"
+                >
+                  {{ data?.original_animation_url }}
+                </NuxtLink>
+              </template>
+              <p>View the original animation on LottieFiles</p>
+            </n-popover>
+          </n-space>
+
+          <n-space>
+            <Icon name="mdi:license" size="25" />
+
+            <NuxtLink
+              to="#"
+              target="_blank"
+              rel="noopener"
+              class="hover:underline hover:text-cyan-600 text-sm transition-all"
+            >
+              <p>Distributed under the Lottie Simple License</p>
+            </NuxtLink>
           </n-space>
         </n-space>
       </n-tab-pane>
 
-      <n-tab-pane name="Asset Links" tab="Asset Links">
+      <n-tab-pane name="How to Use?" tab="How to Use?">
         <n-space vertical class="px-2 py-4">
           <n-space
             align="center"
@@ -95,27 +130,6 @@ const createdDate = computed(() => {
           >
             <p class="font-medium text-slate-700 text-sm">
               {{ cdnLottieUrl }}
-            </p>
-
-            <n-button
-              color="black"
-              size="medium"
-              @click="copyToClipboard(cdnLottieUrl)"
-            >
-              <template #icon>
-                <Icon name="ant-design:copy-filled" />
-              </template>
-              Copy
-            </n-button>
-          </n-space>
-
-          <n-space
-            align="center"
-            class="border w-full pl-3"
-            justify="space-between"
-          >
-            <p class="font-medium text-sm text-slate-700 break-all">
-              {{ bunnyCDNLottieUrl }}
             </p>
 
             <n-button

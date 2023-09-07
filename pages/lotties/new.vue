@@ -15,6 +15,7 @@ const lottieData = ref({});
 
 const showLottiePreview = ref(false);
 const showLoader = ref(false);
+const confirmFollowsGuidelines = ref(false);
 
 const model = reactive({
   name: "",
@@ -98,7 +99,7 @@ const publishLottie = () => {
 
       const response = data.value;
 
-      if ("id" in response) {
+      if (response && "id" in response) {
         await navigateTo(`/animation/${response.id}`);
       } else {
         message.error("Something went wrong. Please try again later.");
@@ -112,7 +113,16 @@ const publishLottie = () => {
 </script>
 
 <template>
-  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8">
+  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-full">
+    <h1>Let's upload a new lottie!</h1>
+
+    <p class="mt-2 text-lg">
+      We need some information about your lottie animation before we can publish
+      it.
+    </p>
+
+    <n-divider></n-divider>
+
     <n-form ref="formRef" :model="model" size="large" :rules="rules">
       <div class="flex justify-between space-x-4 w-full">
         <div class="flex-1 pr-4">
@@ -191,11 +201,29 @@ const publishLottie = () => {
           />
 
           <p class="text-xs pt-1 text-slate-500">
-            If you are not the original creator of this animation and have
-            edited it in some way, please credit the original creator by
-            providing a link to the original animation.
+            If you have made modifications to this animation without being its
+            original creator, we kindly request that you acknowledge the
+            original creator by including a hyperlink to the source animation.
+            <br />
+            If you are uploading a Lottie animation from
+            <NuxtLink
+              href="https://lottiefiles.com/"
+              class="hover:underline text-cyan-500 font-medium"
+            >
+              LottieFiles</NuxtLink
+            >, we also request that you furnish a hyperlink to the original
+            source animation.
           </p>
         </div>
+      </n-form-item>
+
+      <n-form-item :show-label="false">
+        <n-space align="center">
+          <n-checkbox v-model:checked="confirmFollowsGuidelines"> </n-checkbox>
+          <p class="text-sm">
+            I confirm that this animation adheres to the Upload Guidelines.
+          </p>
+        </n-space>
       </n-form-item>
 
       <n-divider></n-divider>
@@ -207,6 +235,7 @@ const publishLottie = () => {
           class="w-full"
           :loading="showLoader"
           @click="publishLottie"
+          :disabled="!confirmFollowsGuidelines"
         >
           <template #icon>
             <Icon name="entypo:publish" />

@@ -1,11 +1,22 @@
 <script setup lang="ts">
 const message = useMessage();
+const route = useRoute();
 
 const settingsStore = useSettingsStore();
 
-const { data, error } = await useFetch(`/api/lottie`, {
+const query = useRoute().query;
+
+console.log("query", query);
+
+const { data, error } = await useFetch(`/api/search`, {
   method: "GET",
+  params: {
+    q: query.q,
+  },
+  key: route.fullPath,
 });
+
+console.log("data", data.value);
 
 if (error.value) {
   console.error(error.value.message);
@@ -15,12 +26,12 @@ if (error.value) {
 
 <template>
   <main class="flex flex-col max-w-screen-xl mx-auto w-full p-8">
-    <h1>Animations</h1>
-
-    <p class="pt-3">
-      A collection of animations that you can use in your projects. You can
-      download the JSON file or copy the URL and use it in your project.
-    </p>
+    <h1>
+      Search results for
+      <span class="text-cyan-600">
+        {{ query.q }}
+      </span>
+    </h1>
 
     <n-divider />
 
@@ -39,6 +50,6 @@ if (error.value) {
 
     <n-divider />
 
-    <GridOfLotties :lottieList="data as any" />
+    <GridOfLotties :lottieList="data" />
   </main>
 </template>
