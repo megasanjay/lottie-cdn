@@ -7,13 +7,15 @@ const settingsStore = useSettingsStore();
 const query = useRoute().query;
 
 console.log("query", query);
+console.log("route.fullPath", route.fullPath);
 
 const { data, error } = await useFetch(`/api/search`, {
   method: "GET",
-  params: {
+  query: {
     q: query.q,
   },
   key: route.fullPath,
+  server: true,
 });
 
 console.log("data", data.value);

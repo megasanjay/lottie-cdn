@@ -1,36 +1,9 @@
 <script setup lang="ts">
-// import SearchInput from "vue-search-input";
-
 const user = useUser();
-const message = useMessage();
 const queryParams = useRoute().query;
 
 const searchInput = ref<HTMLInputElement | null>(null);
 const searchTerm = ref(queryParams.q?.toString() || "");
-
-const options = [
-  {
-    disabled: true,
-    key: "marina bay sands",
-    label: "Marina Bay Sands",
-  },
-  {
-    key: "brown's hotel, london",
-    label: "Brown's Hotel, London",
-  },
-  {
-    key: "atlantis nahamas, nassau",
-    label: "Atlantis Bahamas, Nassau",
-  },
-  {
-    key: "the beverly hills hotel, los angeles",
-    label: "The Beverly Hills Hotel, Los Angeles",
-  },
-];
-
-const handleSelect = (key: string | number) => {
-  message.info(String(key));
-};
 
 const highlightText = () => {
   searchInput.value?.select();
@@ -41,12 +14,18 @@ const searchForLotties = async () => {
 
   if (!query) return;
 
+  console.log("searchForLotties", query);
+
   await navigateTo({
     path: "/search",
     query: {
       q: encodeURIComponent(query),
     },
+    replace: true,
   });
+
+  // reload the page
+  window.location.reload();
 };
 </script>
 
@@ -104,23 +83,22 @@ const searchForLotties = async () => {
           </n-button>
         </n-input-group>
 
-        <!-- <SearchInput v-model="searchTerm" /> -->
-
         <n-divider vertical />
 
-        <n-dropdown
-          v-if="user"
-          trigger="hover"
-          :options="options"
-          placement="bottom-end"
-          @select="handleSelect"
-        >
-          <n-avatar
-            round
-            size="large"
-            :src="`https://api.dicebear.com/6.x/thumbs/svg?seed=${user.userId}&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9`"
-          />
-        </n-dropdown>
+        <n-popover trigger="hover" v-if="user" placement="bottom-end">
+          <template #trigger>
+            <n-avatar
+              round
+              size="large"
+              :src="`https://api.dicebear.com/6.x/thumbs/svg?seed=${user.userId}&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9`"
+            />
+          </template>
+          <template #header>
+            <n-text strong depth="1"> Divider is on the bottom. </n-text>
+          </template>
+          Content.
+          <template #footer> Divider is on the top. </template>
+        </n-popover>
       </n-space>
     </n-space>
   </header>
