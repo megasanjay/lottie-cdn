@@ -58,7 +58,8 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "LottieLink is a storage platform for commonly used lotties.",
+      content:
+        "Lottiel.ink is a new way to store and discover lottie animations. With CDN hosting, using Lottie animations on your website has never been easier.",
     },
     {
       name: "msapplication-TileColor",

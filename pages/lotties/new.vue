@@ -110,6 +110,10 @@ const publishLottie = () => {
     }
   });
 };
+
+useSeoMeta({
+  title: "Upload a new lottie | Lottiel.ink",
+});
 </script>
 
 <template>

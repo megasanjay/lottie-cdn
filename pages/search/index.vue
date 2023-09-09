@@ -24,6 +24,10 @@ if (error.value) {
   console.error(error.value.message);
   message.error("Something went wrong. " + error.value.data.message);
 }
+
+useSeoMeta({
+  title: `Search results for '${query.q}' | Lottiel.ink`,
+});
 </script>
 
 <template>

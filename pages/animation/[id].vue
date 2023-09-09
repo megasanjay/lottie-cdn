@@ -33,6 +33,10 @@ const createdDate = computed(() => {
 
   return dayjs(data.value.created_at).format("MMM DD, YYYY - hh:mm A");
 });
+
+useSeoMeta({
+  title: `${data.value?.name} | Lottiel.ink`,
+});
 </script>
 
 <template>
