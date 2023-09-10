@@ -1,11 +1,17 @@
+import protectRoute from "../../utils/protectRoute";
+
 export default defineEventHandler(async (event) => {
-  // Get all the lottie animations
+  const user = await protectRoute(event);
+
+  const userId = user.userId;
+
   const response = await prisma.lottie.findMany({
     select: {
       id: true,
-
       created_at: true,
-      created_by: true,
+    },
+    where: {
+      created_by: userId,
     },
     orderBy: {
       created_at: "desc",
@@ -14,12 +20,10 @@ export default defineEventHandler(async (event) => {
 
   if (!response) {
     throw createError({
-      message: "Lottie animation not found",
+      message: "Lottie animations not found",
       statusCode: 404,
     });
   }
-
-  // duplicate the response array
 
   return response;
 });

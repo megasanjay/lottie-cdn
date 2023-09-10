@@ -3,7 +3,7 @@ const message = useMessage();
 
 const settingsStore = useSettingsStore();
 
-const { data, error } = await useFetch(`/api/lotties`, {
+const { data, error } = await useFetch(`/api/user/my-lotties`, {
   method: "GET",
 });
 
@@ -13,18 +13,15 @@ if (error.value) {
 }
 
 useSeoMeta({
-  title: "Animations | Lottiel.ink",
+  title: "My Animations | Lottiel.ink",
 });
 </script>
 
 <template>
   <main class="flex flex-col max-w-screen-xl mx-auto w-full p-8">
-    <h1>Animations</h1>
+    <h1>My Animations</h1>
 
-    <p class="pt-3">
-      A collection of animations that you can use in your projects. You can
-      download the JSON file or copy the URL and use it in your project.
-    </p>
+    <p class="pt-3">All lotties that you have uploaded to LottieLink.</p>
 
     <n-divider />
 

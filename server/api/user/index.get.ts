@@ -1,4 +1,4 @@
-import protectRoute from "../utils/protectRoute";
+import protectRoute from "../../utils/protectRoute";
 
 export default defineEventHandler(async (event) => {
   const user = await protectRoute(event);

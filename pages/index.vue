@@ -1,25 +1,10 @@
-<script lang="ts" setup>
-definePageMeta({
-  middleware: ["protected"],
-});
-
-const user = useAuthenticatedUser();
-
-const handleLogout = async () => {
-  // if (!(e.target instanceof HTMLFormElement)) return;
-
-  await $fetch("/api/logout", {
-    method: "POST",
-    redirect: "manual",
-  });
-
-  await navigateTo("/auth/login");
-};
+<script setup>
+const user = useUser();
 </script>
 
 <template>
   <main>
-    <section class="">
+    <section class="px-3">
       <div
         class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
       >
@@ -27,32 +12,45 @@ const handleLogout = async () => {
           <h1
             class="max-w-2xl mb-6 text-slate-800 text-4xl font-extrabold md:text-5xl xl:text-6xl"
           >
-            A new way to host your Lottie animations
+            A new way to serve your Lottie animations
           </h1>
 
-          <p class="max-w-2xl mb-6 lg:mb-8 text-lg lg:text-xl">
-            Bypass the 10 project limit on LottieFiles and use the lottiel.ink
-            CDN to host your Lottie animations.
+          <p class="max-w-2xl mb-6 lg:mb-8 text-lg lg:text-2xl font-medium">
+            Upload your Lottie animations and use our CDN to serve them in your
+            projects. Bypass the 10 animation limit on LottieFiles and use as
+            many as you want.
           </p>
 
-          <NuxtLink
-            to="/animations"
-            class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-emerald-600 hover:bg-emerald-800 transition-all"
-          >
-            View Lotties
-            <svg
-              class="w-5 h-5 ml-2 -mr-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+          <n-space align="center">
+            <NuxtLink
+              to="/animations"
+              class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-emerald-600 hover:bg-emerald-800 transition-all"
             >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </NuxtLink>
+              View Lotties
+              <svg
+                class="w-5 h-5 ml-2 -mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </NuxtLink>
+
+            <NuxtLink to="/auth/signup" v-if="!user">
+              <n-button type="primary" size="large" secondary>
+                <template #icon>
+                  <Icon name="ph:sign-in-bold" />
+                </template>
+
+                Sign up
+              </n-button>
+            </NuxtLink>
+          </n-space>
         </div>
 
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
@@ -64,7 +62,7 @@ const handleLogout = async () => {
       </div>
     </section>
 
-    <section class="bg-emerald-50">
+    <section class="bg-emerald-50 px-3">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div class="max-w-screen-lg sm:text-lg">
           <h2 class="mb-4 text-4xl font-bold">Why does this exist?</h2>
@@ -102,16 +100,5 @@ const handleLogout = async () => {
         </div>
       </div>
     </section>
-
-    <h1>Profile</h1>
-    <p>User id: {{ user.userId }}</p>
-    <p>Username: {{ user.username }}</p>
-    <!-- <form method="post" action="/api/logout" @submit.prevent="handleLogout">
-      <input type="submit" value="Sign out" />
-    </form> -->
-
-    <n-button @click="handleLogout"> Sign out </n-button>
-
-    <NuxtLink to="/lotties/new"> Create new</NuxtLink>
   </main>
 </template>

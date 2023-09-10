@@ -22,7 +22,7 @@ const cdnLottieUrl = ref("https://cdn.lottiel.ink/assets");
   <div class="grid grid-cols-4 gap-8 py-5">
     <div
       v-for="lottie in lottieList"
-      class="border p-2 shadow-md rounded-xl hover:shadow-lg transition-all cursor-pointer flex flex-col space-y-2 justify-center"
+      class="border p-2 shadow-md rounded-xl hover:shadow-lg transition-all cursor-pointer flex flex-col space-y-2 justify-center hover:border-emerald-400 border-emerald-200"
     >
       <NuxtLink
         :to="`/animation/${lottie.id}`"

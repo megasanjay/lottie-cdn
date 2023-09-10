@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
     username: unknown;
     password: unknown;
   }>(event);
+
   // basic check
   if (
     typeof username !== "string" ||

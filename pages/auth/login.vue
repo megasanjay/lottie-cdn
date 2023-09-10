@@ -56,13 +56,15 @@ const signIn = async () => {
       <div
         class="mt-4 w-full max-w-lg space-y-6 rounded-lg bg-white px-4 py-6 sm:px-8 sm:py-8"
       >
-        <div class="pb-4">
+        <div class="">
           <h1 class="mb-3 text-left text-2xl font-bold sm:text-4xl">
             Welcome back!
           </h1>
 
           <p>Sign in to your account to continue using our services.</p>
         </div>
+
+        <n-divider />
 
         <div class="flex w-full flex-col">
           <span class="mb-1 text-left text-sm text-slate-600"> Username </span>

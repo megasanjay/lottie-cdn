@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
     username: unknown;
     password: unknown;
   }>(event);
+
   // basic check
   if (
     typeof username !== "string" ||
@@ -16,6 +17,7 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
+
   if (
     typeof password !== "string" ||
     password.length < 6 ||
@@ -26,9 +28,6 @@ export default defineEventHandler(async (event) => {
       statusCode: 400,
     });
   }
-
-  console.log("username", username);
-  console.log("password", password);
 
   try {
     const user = await auth.createUser({

@@ -1,9 +1,56 @@
 <script setup lang="ts">
+import { Icon } from "#components";
+
 const user = useUser();
 const queryParams = useRoute().query;
 
 const searchInput = ref<HTMLInputElement | null>(null);
 const searchTerm = ref(queryParams.q?.toString() || "");
+
+const renderIcon = (name: string) => {
+  return () => {
+    return h(Icon, { name, size: "20", class: "text-emerald-600" });
+  };
+};
+
+const options = [
+  {
+    label: "My Profile",
+    key: "profile",
+    icon: renderIcon("iconamoon:profile-circle-fill"),
+  },
+  {
+    label: "My Animations",
+    key: "profile/my-animations",
+    icon: renderIcon("typcn:th-list"),
+  },
+  {
+    key: "d1",
+    type: "divider",
+  },
+  {
+    label: "Logout",
+    key: "logout",
+    icon: renderIcon("solar:logout-2-bold-duotone"),
+  },
+];
+
+const handleSelect = async (option: string) => {
+  if (option === "profile") {
+    console.log("profile");
+    await navigateTo("/profile");
+  }
+
+  if (option === "profile/my-animations") {
+    console.log("profile/my-animations");
+    await navigateTo("/profile/my-animations");
+  }
+
+  if (option === "logout") {
+    console.log("logout");
+    await navigateTo("/auth/logout");
+  }
+};
 
 const highlightText = () => {
   searchInput.value?.select();
@@ -83,22 +130,32 @@ const searchForLotties = async () => {
           </n-button>
         </n-input-group>
 
-        <n-divider vertical />
+        <n-divider v-if="user" vertical />
 
-        <n-popover trigger="hover" v-if="user" placement="bottom-end">
-          <template #trigger>
-            <n-avatar
-              round
-              size="large"
-              :src="`https://api.dicebear.com/6.x/thumbs/svg?seed=${user.userId}&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9`"
-            />
-          </template>
-          <template #header>
-            <n-text strong depth="1"> Divider is on the bottom. </n-text>
-          </template>
-          Content.
-          <template #footer> Divider is on the top. </template>
-        </n-popover>
+        <n-dropdown
+          v-if="user"
+          size="large"
+          :options="options"
+          @select="handleSelect"
+          trigger="hover"
+          placement="bottom-end"
+        >
+          <n-avatar
+            round
+            size="large"
+            :src="`https://api.dicebear.com/6.x/thumbs/svg?seed=${user.userId}&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9`"
+          />
+        </n-dropdown>
+
+        <NuxtLink v-else to="/auth/login">
+          <n-button color="black" size="medium" class="w-full">
+            <template #icon>
+              <Icon name="solar:login-2-bold-duotone" />
+            </template>
+
+            Login
+          </n-button>
+        </NuxtLink>
       </n-space>
     </n-space>
   </header>
