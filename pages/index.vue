@@ -88,15 +88,27 @@ const user = useUser();
             download the JSON file if you want to host the lottie yourself.
           </p>
 
-          <NuxtLink to="https://vue3-lottie.vercel.app/">
-            <n-button type="info" secondary size="large">
-              <template #icon>
-                <Icon name="fa-regular:laugh-beam" />
-              </template>
+          <n-space align="center">
+            <NuxtLink to="https://vue3-lottie.vercel.app/">
+              <n-button type="info" secondary size="large">
+                <template #icon>
+                  <Icon name="fa-regular:laugh-beam" />
+                </template>
 
-              Vue the library
-            </n-button>
-          </NuxtLink>
+                Vue the library
+              </n-button>
+            </NuxtLink>
+
+            <NuxtLink to="/about">
+              <n-button secondary size="large">
+                <template #icon>
+                  <Icon name="fa-regular:laugh-beam" />
+                </template>
+
+                Learn more about LottieLink
+              </n-button>
+            </NuxtLink>
+          </n-space>
         </div>
       </div>
     </section>

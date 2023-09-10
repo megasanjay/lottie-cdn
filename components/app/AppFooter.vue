@@ -22,7 +22,9 @@
 
       <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900">
         <li>
-          <a href="#" class="mx-2 hover:underline md:mx-3">About</a>
+          <NuxtLink to="/about" class="mx-2 hover:underline md:mx-3">
+            About
+          </NuxtLink>
         </li>
 
         <li>
