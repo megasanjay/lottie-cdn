@@ -74,6 +74,16 @@ body {
   }
 
   /* #endregion  /**======== Scrollbar =========== */
+
+  .heading {
+    @apply mb-2 mt-4 text-4xl font-extrabold tracking-tight;
+  }
+  .subheading {
+    @apply mb-3 mt-6 text-3xl font-bold tracking-tight;
+  }
+  .content {
+    @apply my-1 text-base font-normal leading-7 text-gray-800;
+  }
 }
 
 @layer utilities {
