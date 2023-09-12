@@ -40,7 +40,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8">
+  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-screen">
     <n-space justify="space-between">
       <h3>
         {{ data?.name }}
@@ -106,7 +106,13 @@ useSeoMeta({
                   {{ data?.original_animation_url }}
                 </NuxtLink>
               </template>
-              <p>View the original animation on LottieFiles</p>
+              <p>
+                {{
+                  data?.original_animation_url.search("lottiefiles.com")
+                    ? "View the original animation on LottieFiles"
+                    : "View the original source of this lottie"
+                }}
+              </p>
             </n-popover>
           </n-space>
 

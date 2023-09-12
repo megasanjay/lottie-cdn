@@ -84,6 +84,10 @@ body {
   .content {
     @apply my-1 text-base font-normal leading-7 text-gray-800;
   }
+
+  .text-url {
+    @apply text-emerald-700 cursor-pointer hover:underline font-medium transition-all hover:text-emerald-500;
+  }
 }
 
 @layer utilities {

@@ -77,7 +77,7 @@ const searchForLotties = async () => {
 </script>
 
 <template>
-  <header class="bg-slate-50 px-2 py-2">
+  <header class="bg-emerald-50 border-b border-emerald-600 px-2 py-2">
     <n-space
       justify="space-between"
       class="max-w-screen-xl mx-auto"
@@ -95,7 +95,7 @@ const searchForLotties = async () => {
           />
 
           <span
-            class="text-2xl font-bold text-slate-700 group-hover:text-cyan-500 transition-all"
+            class="text-2xl font-bold text-slate-700 group-hover:text-emerald-600 transition-all"
           >
             lottiel.ink
           </span>

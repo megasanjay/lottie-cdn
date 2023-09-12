@@ -62,7 +62,7 @@ const user = useUser();
       </div>
     </section>
 
-    <section class="bg-emerald-50 px-3">
+    <section class="bg-slate-50 px-3">
       <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div class="max-w-screen-lg sm:text-lg">
           <h2 class="mb-4 text-4xl font-bold">Why does this exist?</h2>

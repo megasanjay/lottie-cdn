@@ -117,7 +117,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-full">
+  <main
+    class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-full mb-20 mt-10"
+  >
     <h1>Let's upload a new lottie!</h1>
 
     <p class="mt-2 text-lg">

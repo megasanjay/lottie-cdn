@@ -1,8 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <footer class="p-4 bg-white md:p-8 lg:p-10">
-    <div class="mx-auto max-w-screen-xl text-center">
+  <footer
+    class="p-4 bg-emerald-50/90 border-t border-b border-emerald-600 md:p-8 lg:p-10"
+  >
+    <div class="mx-auto w-max max-w-screen-xl text-center">
       <NuxtLink
         to="/"
         class="flex items-center space-x-3 group justify-center text-2xl font-semibold text-gray-900"
@@ -10,27 +12,27 @@
         <img src="/logo.svg" class="w-10 transition-all" alt="" />
 
         <span
-          class="text-2xl font-bold text-slate-700 group-hover:text-cyan-500 transition-all"
+          class="text-2xl font-bold group-hover:text-emerald-600 transition-all"
         >
           lottiel.ink
         </span>
       </NuxtLink>
 
-      <p class="my-6 text-gray-500">
-        A new way to share Lottie animations with the world.
-      </p>
+      <p class="mb-5 mt-2">A new way to share Lotties with the world!</p>
 
-      <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900">
+      <n-divider />
+
+      <ul class="flex flex-wrap justify-center items-center my-5 divide-x">
         <li>
-          <NuxtLink to="/about" class="mx-2 hover:underline md:mx-3">
-            About
-          </NuxtLink>
+          <NuxtLink to="/about" class="mx-2 text-url md:mx-3"> About </NuxtLink>
         </li>
 
         <li>
-          <a href="#" class="mx-2 hover:underline md:mx-3">Contact</a>
+          <a href="#" class="mx-2 text-url md:mx-3">Contact</a>
         </li>
       </ul>
+
+      <n-divider />
 
       <span class="text-sm text-gray-500 sm:text-center">
         © 2023
