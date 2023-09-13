@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 const user = useUser();
 
-const message = useMessage();
-
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
 }
@@ -16,6 +14,7 @@ const loading = ref(false);
 
 const signUp = async () => {
   loading.value = true;
+  errorMessage.value = null;
 
   try {
     await $fetch("/api/signup", {
@@ -35,7 +34,7 @@ const signUp = async () => {
       };
     };
 
-    message.error(error.message);
+    errorMessage.value = error.message;
   }
 
   loading.value = false;
@@ -89,6 +88,10 @@ const signUp = async () => {
             placeholder=""
           />
         </div>
+
+        <p class="text-red-500 text-center font-medium">
+          {{ errorMessage }}
+        </p>
 
         <n-button
           strong

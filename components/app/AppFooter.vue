@@ -28,7 +28,9 @@
         </li>
 
         <li>
-          <a href="#" class="mx-2 text-url md:mx-3">Contact</a>
+          <NuxtLink to="/contact" class="mx-2 text-url md:mx-3">
+            Contact
+          </NuxtLink>
         </li>
       </ul>
 

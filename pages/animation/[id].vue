@@ -40,7 +40,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-screen">
+  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8">
     <n-space justify="space-between">
       <h3>
         {{ data?.name }}

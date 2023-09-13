@@ -51,17 +51,17 @@ export default defineEventHandler(async (event) => {
     authRequest.setSession(session);
 
     return sendRedirect(event, "/"); // redirect to profile page
-  } catch (e) {
+  } catch (e: any) {
     console.log("e", e);
 
     // check for unique constraint error in user table
+    if (e.code === "P2002") {
+      throw createError({
+        message: "Username already taken",
+        statusCode: 400,
+      });
+    }
 
-    // if (e instanceof SqliteError && e.code === "SQLITE_CONSTRAINT_UNIQUE") {
-    //   throw createError({
-    //     message: "Username already taken",
-    //     statusCode: 400,
-    //   });
-    // }
     throw createError({
       message: "An unknown error occurred",
       statusCode: 500,
