@@ -1,7 +1,7 @@
 <template>
   <NaiveConfig>
     <n-message-provider>
-      <NuxtLoadingIndicator color="#67e8f9" :height="5" />
+      <NuxtLoadingIndicator color="#065f46" :height="5" />
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

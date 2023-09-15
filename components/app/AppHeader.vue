@@ -86,7 +86,7 @@ const searchForLotties = async () => {
       <n-space align="center">
         <NuxtLink
           to="/"
-          class="flex items-center space-x-3 hover:space-x-2 group"
+          class="flex items-center space-x-2 hover:space-x-3 group"
         >
           <img
             src="/logo.svg"
