@@ -143,6 +143,7 @@ const searchForLotties = async () => {
           <n-avatar
             round
             size="large"
+            class="cursor-pointer"
             :src="`https://api.dicebear.com/6.x/thumbs/svg?seed=${user.userId}&radius=50&backgroundColor=b6e3f4,c0aede,d1d4f9`"
           />
         </n-dropdown>
