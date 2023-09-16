@@ -6,7 +6,7 @@ definePageMeta({
   middleware: ["protected"],
 });
 
-const message = useMessage();
+const push = usePush();
 
 const formRef = ref<FormInst | null>(null);
 const uploadRef = ref<UploadInst | null>(null);
@@ -43,7 +43,11 @@ const handleChange = (data: { fileList: UploadFileInfo[] }) => {
         lottieData.value = JSON.parse(e.target?.result as string);
         showLottiePreview.value = true;
       } catch (error) {
-        message.error("Only JSON files are supported");
+        push.error({
+          title: "Error",
+          message: "Something went wrong while parsing the JSON file",
+        });
+
         showLottiePreview.value = false;
       }
     };
@@ -62,7 +66,11 @@ const publishLottie = () => {
     if (!errors) {
       // Check if lottie data is empty
       if (Object.keys(lottieData.value).length === 0) {
-        message.error("Please upload a lottie data file");
+        push.error({
+          title: "Error",
+          message: "Please upload a lottie data file",
+        });
+
         return;
       }
 
@@ -85,7 +93,10 @@ const publishLottie = () => {
 
         console.error(error.value.data.message);
 
-        message.error("Something went wrong. Please try again later.");
+        push.error({
+          title: "Error",
+          message: "Something went wrong. Please try again later.",
+        });
 
         return;
 
@@ -95,18 +106,28 @@ const publishLottie = () => {
 
       showLoader.value = false;
 
-      message.success("Lottie published successfully");
+      push.success({
+        title: "Success",
+        message: "Lottie published successfully",
+      });
 
       const response = data.value;
 
       if (response && "id" in response) {
         await navigateTo(`/animation/${response.id}`);
       } else {
-        message.error("Something went wrong. Please try again later.");
+        push.error({
+          title: "Error",
+          message: "Something went wrong. Please try again later.",
+        });
       }
     } else {
       console.log(errors);
-      message.error("Please fill in all required fields");
+
+      push.error({
+        title: "Error",
+        message: "Please fill in all the required fields",
+      });
     }
   });
 };

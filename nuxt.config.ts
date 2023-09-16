@@ -27,7 +27,11 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["@/assets/css/tailwind.css"],
+  css: [
+    "@/assets/css/tailwind.css",
+    "notivue/notifications.css",
+    "notivue/animations.css",
+  ],
 
   devtools: {
     enabled: true,
@@ -45,6 +49,7 @@ export default defineNuxtConfig({
     "@bg-dev/nuxt-naiveui",
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
+    "notivue/nuxt",
     [
       "@nuxtjs/google-fonts",
       {
@@ -65,4 +70,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {},
+
+  notivue: {
+    // Options
+  },
 });

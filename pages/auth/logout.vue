@@ -3,7 +3,7 @@ definePageMeta({
   middleware: ["protected"],
 });
 
-const message = useMessage();
+const push = usePush();
 
 const { data, error } = await useFetch("/api/logout", {
   method: "POST",
@@ -12,10 +12,17 @@ const { data, error } = await useFetch("/api/logout", {
 
 if (error.value) {
   console.error(error.value.message);
-  message.error("Something went wrong. " + error.value.data.message);
+
+  push.error({
+    title: "Error",
+    message: "An error occurred while logging you out",
+  });
 }
 
-message.success("You have been logged out.");
+push.success({
+  title: "Logged out",
+  message: "You have been logged out",
+});
 
 await navigateTo("/auth/login");
 </script>

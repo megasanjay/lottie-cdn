@@ -87,3 +87,13 @@ model Comment {
 
   @@index([lottie_id])
 }
+
+model Contact {
+  id String @id @default(cuid())
+
+  email   String @default("")
+  subject String @default("")
+  message String @default("")
+
+  created_at DateTime @default(now())
+}

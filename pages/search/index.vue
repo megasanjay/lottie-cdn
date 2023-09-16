@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const message = useMessage();
+const push = usePush();
 const route = useRoute();
 
 const settingsStore = useSettingsStore();
@@ -22,7 +22,11 @@ console.log("data", data.value);
 
 if (error.value) {
   console.error(error.value.message);
-  message.error("Something went wrong. " + error.value.data.message);
+
+  push.error({
+    title: "Error",
+    message: "An error occurred while fetching the animations",
+  });
 }
 
 useSeoMeta({

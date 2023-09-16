@@ -6,7 +6,7 @@ import utc from "dayjs/plugin/utc";
 // eslint-disable-next-line import/no-named-as-default-member
 dayjs.extend(utc);
 
-const message = useMessage();
+const push = usePush();
 const route = useRoute();
 
 const cdnLottieUrl = ref(
@@ -19,13 +19,20 @@ const { data, error } = await useFetch(`/api/lottie/${route.params.id}`, {
 
 if (error.value) {
   console.error(error.value.message);
-  message.error("Something went wrong. " + error.value.data.message);
+
+  push.error({
+    title: "Error",
+    message: "An error occurred while fetching the animation",
+  });
 }
 
 const copyToClipboard = (url: string) => {
   navigator.clipboard.writeText(url);
 
-  message.success("Copied to clipboard");
+  push.success({
+    title: "Copied",
+    message: "The URL has been copied to your clipboard",
+  });
 };
 
 const createdDate = computed(() => {

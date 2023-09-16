@@ -1,17 +1,22 @@
 <template>
   <NaiveConfig>
-    <n-message-provider>
-      <NuxtLoadingIndicator color="#065f46" :height="5" />
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </n-message-provider>
+    <Notivue v-slot="item">
+      <NotivueSwipe :item="item">
+        <Notifications :item="item" :theme="materialTheme" />
+      </NotivueSwipe>
+    </Notivue>
+
+    <NuxtLoadingIndicator color="#065f46" :height="5" />
+
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </NaiveConfig>
 </template>
 
 <script setup lang="ts">
 import { ThemeConfig } from "@bg-dev/nuxt-naiveui";
-import "vue-search-input/dist/styles.css";
+import { materialTheme } from "notivue";
 
 const themeConfig: ThemeConfig = {
   dark: {}, // Theme options applied on dark mode

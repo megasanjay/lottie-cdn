@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const message = useMessage();
+const push = usePush();
 
 const settingsStore = useSettingsStore();
 
@@ -9,7 +9,11 @@ const { data, error } = await useFetch(`/api/user/my-lotties`, {
 
 if (error.value) {
   console.error(error.value.message);
-  message.error("Something went wrong. " + error.value.data.message);
+
+  push.error({
+    title: "Error",
+    message: "An error occurred while fetching your animations",
+  });
 }
 
 useSeoMeta({

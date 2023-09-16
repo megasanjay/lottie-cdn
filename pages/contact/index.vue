@@ -1,7 +1,83 @@
-<script setup>
+<script setup lang="ts">
+import { FormInst } from "naive-ui";
+
+const push = usePush();
+
+const showLoader = ref(false);
+
+const contactFormRef = ref<FormInst | null>(null);
+
+const contactForm = reactive({
+  email: "",
+  subject: "",
+  message: "",
+});
+
 /**
- * TODO: Add contact form
+ * TODO: add custom validation rules
  */
+const rules = {
+  email: {
+    required: true,
+    message: "Please enter your email",
+    trigger: "blur",
+  },
+  subject: {
+    required: true,
+    message: "Please enter a subject",
+    trigger: "blur",
+  },
+  message: {
+    required: true,
+    message: "Please enter a message",
+    trigger: "blur",
+  },
+};
+
+const saveMessage = (e: MouseEvent) => {
+  e.preventDefault();
+
+  contactFormRef.value?.validate(async (errors) => {
+    if (!errors) {
+      showLoader.value = true;
+
+      const body = {
+        email: contactForm.email.trim(),
+        subject: contactForm.subject.trim(),
+        message: contactForm.message.trim(),
+      };
+
+      const { data, error } = await useFetch("/api/contact", {
+        body,
+        method: "POST",
+      });
+
+      showLoader.value = false;
+
+      if (error.value) {
+        push.error({
+          title: "Error",
+          message: error.value.data.message,
+        });
+
+        return;
+      }
+
+      console.log(data.value);
+
+      push.success({
+        title: "Success",
+        message: "Your message has been sent! We'll get back to you soon.",
+      });
+    } else {
+      push.error({
+        title: "Invalid Form",
+        message: "Please fill in all fields",
+      });
+      console.log(errors);
+    }
+  });
+};
 </script>
 
 <template>
@@ -17,54 +93,40 @@
 
     <n-divider />
 
-    <form action="#" class="space-y-8">
-      <div>
-        <label for="email" class="block mb-2 text-sm font-medium">
-          Your email
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+    <n-form
+      ref="contactFormRef"
+      :model="contactForm"
+      :rules="rules"
+      size="large"
+    >
+      <n-form-item label="Your Email" path="email">
+        <n-input
+          v-model:value="contactForm.email"
           placeholder="hello@lottiel.ink"
-          required
         />
-      </div>
+      </n-form-item>
 
-      <div>
-        <label for="subject" class="block mb-2 text-sm font-medium">
-          Subject
-        </label>
+      <n-form-item label="Subject" path="subject">
+        <n-input v-model:value="contactForm.subject" placeholder="Hello!" />
+      </n-form-item>
 
-        <input
-          type="text"
-          id="subject"
-          class="block p-3 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
-          placeholder="Let us know how we can help you"
-          required
-        />
-      </div>
-
-      <div class="sm:col-span-2">
-        <label for="message" class="block mb-2 text-sm font-medium">
-          Your message
-        </label>
-
-        <textarea
-          id="message"
-          rows="6"
-          class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+      <n-form-item label="Your Message" path="message">
+        <n-input
+          v-model:value="contactForm.message"
+          type="textarea"
           placeholder="Leave a comment..."
-        ></textarea>
-      </div>
+        />
+      </n-form-item>
 
-      <button
-        type="submit"
-        class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
-      >
-        Send message
-      </button>
-    </form>
+      <n-form-item>
+        <n-button @click="saveMessage" type="primary" :loading="showLoader">
+          <template #icon>
+            <Icon name="tabler:send" />
+          </template>
+
+          Send Message
+        </n-button>
+      </n-form-item>
+    </n-form>
   </main>
 </template>
