@@ -87,7 +87,7 @@ useSeoMeta({
       responsibility to ensure that the platform is used for its intended
       purpose. I will be monitoring the platform to ensure that the lotties that
       are uploaded are free to use and are confirming to the
-      <NuxtLink to="https://lottifiles.com">
+      <NuxtLink to="/lottie-simple-license">
         <span class="text-url"> Lottie Simple License</span> </NuxtLink
       >. Any violations will be removed from the platform. I will be adding a
       way for users to report lotties that are not in compliance with the

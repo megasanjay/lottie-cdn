@@ -28,9 +28,6 @@ const themeConfig: ThemeConfig = {
 
 useHead({
   title: "Lottiel.ink",
-  bodyAttrs: {
-    class: "test",
-  },
   link: [
     { href: "/favicon.ico", rel: "icon", type: "image/x-icon" },
     {

@@ -28,6 +28,18 @@
         </li>
 
         <li>
+          <NuxtLink to="/upload-guidelines" class="mx-2 text-url md:mx-3">
+            Upload Guidelines
+          </NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink to="/lottie-simple-license" class="mx-2 text-url md:mx-3">
+            Lottie Simple License
+          </NuxtLink>
+        </li>
+
+        <li>
           <NuxtLink to="/contact" class="mx-2 text-url md:mx-3">
             Contact
           </NuxtLink>

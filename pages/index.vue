@@ -79,7 +79,8 @@ const user = useUser();
             I created a library for users of the Vue/Nuxt ecosystem to use the
             beautiful lotties from LottieFiles in their projects. This library
             also supports importing lotties directly from a URL to prevent the
-            need to download the JSON file.
+            need to download the JSON file. It's used for displaying the lotties
+            on this site as well.
           </p>
 
           <p class="mb-4 font-medium">
@@ -90,7 +91,7 @@ const user = useUser();
 
           <n-space align="center">
             <NuxtLink to="https://vue3-lottie.vercel.app/">
-              <n-button type="info" secondary size="large">
+              <n-button type="primary" secondary size="large">
                 <template #icon>
                   <Icon name="fa-regular:laugh-beam" />
                 </template>
@@ -100,9 +101,9 @@ const user = useUser();
             </NuxtLink>
 
             <NuxtLink to="/about">
-              <n-button secondary size="large">
+              <n-button secondary type="info" size="large">
                 <template #icon>
-                  <Icon name="fa-regular:laugh-beam" />
+                  <Icon name="mdi:about" />
                 </template>
 
                 Learn more about LottieLink

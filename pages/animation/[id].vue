@@ -9,6 +9,9 @@ dayjs.extend(utc);
 const push = usePush();
 const route = useRoute();
 
+const backgroundColor = ref("#FFFFFF");
+const alternate = ref(false);
+
 const cdnLottieUrl = ref(
   `https://cdn.lottiel.ink/assets/${route.params.id}.json`,
 );
@@ -47,7 +50,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8">
+  <main class="flex flex-col max-w-screen-lg mx-auto w-full p-8 h-full">
     <n-space justify="space-between">
       <h3>
         {{ data?.name }}
@@ -74,7 +77,10 @@ useSeoMeta({
 
     <n-divider />
 
-    <div class="w-full h-full max-h-[500px]">
+    <div
+      class="w-full max-h-[500px] relative mb-10"
+      :style="{ backgroundColor }"
+    >
       <ClientOnly>
         <template #fallback>
           <div class="flex justify-center items-center">
@@ -82,7 +88,11 @@ useSeoMeta({
           </div>
         </template>
 
-        <Vue3Lottie :animation-link="cdnLottieUrl" />
+        <Vue3Lottie
+          :animation-link="cdnLottieUrl"
+          :height="400"
+          :alternate="alternate"
+        />
       </ClientOnly>
     </div>
 
@@ -136,6 +146,53 @@ useSeoMeta({
             </NuxtLink>
           </n-space>
         </n-space>
+      </n-tab-pane>
+
+      <n-tab-pane name="Adjust Lottie" tab="Adjust Lottie">
+        <div class="px-2 py-4 flex flex-col space-y-5">
+          <n-card title="Background Color" bordered>
+            <p class="mb-4 text-sm">
+              View the lottie animation with a different background color. This
+              is a preview only and will not be saved.
+            </p>
+
+            <div class="flex w-full items-center space-x-3">
+              <n-color-picker
+                v-model:value="backgroundColor"
+                :swatches="[
+                  '#FFFFFF',
+                  '#18A058',
+                  '#2080F0',
+                  '#F0A020',
+                  'rgba(208, 48, 80, 1)',
+                ]"
+              />
+
+              <n-button
+                color="black"
+                size="medium"
+                @click="backgroundColor = '#FFFFFF'"
+              >
+                <template #icon>
+                  <Icon name="system-uicons:reset-hard" />
+                </template>
+
+                Reset
+              </n-button>
+            </div>
+          </n-card>
+
+          <n-card title="Alternate direction" bordered>
+            <p class="mb-4 text-sm">
+              This will cause the animation to play in reverse on every
+              iteration. Useful for animations that do not loop cleanly.
+            </p>
+
+            <div class="flex w-full items-center space-x-3">
+              <n-switch v-model:value="alternate" />
+            </div>
+          </n-card>
+        </div>
       </n-tab-pane>
 
       <n-tab-pane name="How to Use?" tab="How to Use?">

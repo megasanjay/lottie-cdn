@@ -233,10 +233,7 @@ useSeoMeta({
             original creator by including a hyperlink to the source animation.
             <br />
             If you are uploading a Lottie animation from
-            <NuxtLink
-              href="https://lottiefiles.com/"
-              class="hover:underline text-cyan-500 font-medium"
-            >
+            <NuxtLink href="https://lottiefiles.com/" class="text-url">
               LottieFiles</NuxtLink
             >, we also request that you furnish a hyperlink to the original
             source animation.
@@ -248,7 +245,10 @@ useSeoMeta({
         <n-space align="center">
           <n-checkbox v-model:checked="confirmFollowsGuidelines"> </n-checkbox>
           <p class="text-sm">
-            I confirm that this animation adheres to the Upload Guidelines.
+            I confirm that this animation adheres to the
+            <NuxtLink to="/upload-guidelines">
+              <span class="text-url"> Upload Guidelines</span> </NuxtLink
+            >.
           </p>
         </n-space>
       </n-form-item>
